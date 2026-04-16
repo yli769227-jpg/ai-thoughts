@@ -1,123 +1,155 @@
 :root {
-	--accent: #64ffda;
-	--accent-dark: #00bfa5;
-	--accent-glow: rgba(100, 255, 218, 0.15);
-	--bg-primary: #0a0e17;
-	--bg-secondary: #111827;
-	--bg-card: rgba(17, 24, 39, 0.8);
-	--text-primary: #e2e8f0;
-	--text-secondary: #94a3b8;
-	--text-muted: #64748b;
-	--border: rgba(100, 255, 218, 0.1);
-	--box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(100, 255, 218, 0.05);
+	--font-display: 'Instrument Serif', Georgia, serif;
+	--font-body: 'Outfit', system-ui, sans-serif;
+
+	--blue-50: #f0f5ff;
+	--blue-100: #e0ecff;
+	--blue-200: #c7d9f7;
+	--blue-300: #9fbae8;
+	--blue-400: #6b93d6;
+	--blue-500: #4272c4;
+	--blue-600: #2d5aa8;
+	--blue-700: #1e3f7a;
+	--blue-800: #152b54;
+	--blue-900: #0e1c38;
+
+	--white: #ffffff;
+	--ivory: #fafbfe;
+	--pearl: #f3f5fa;
+	--silver: #e4e8f1;
+	--slate: #8993a8;
+	--ink: #1a2035;
+
+	--accent: var(--blue-500);
+	--accent-light: var(--blue-100);
+	--accent-subtle: var(--blue-50);
+
+	--text-primary: var(--ink);
+	--text-body: #3a4255;
+	--text-secondary: var(--slate);
+
+	--radius-sm: 6px;
+	--radius-md: 12px;
+	--radius-lg: 20px;
+
+	--shadow-soft: 0 1px 3px rgba(14, 28, 56, 0.04), 0 8px 24px rgba(14, 28, 56, 0.06);
+	--shadow-hover: 0 2px 8px rgba(14, 28, 56, 0.06), 0 12px 36px rgba(14, 28, 56, 0.1);
+
+	--transition: 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
 }
 
 body {
-	font-family: var(--font-atkinson);
+	font-family: var(--font-body);
 	margin: 0;
 	padding: 0;
-	text-align: left;
-	background: var(--bg-primary);
-	color: var(--text-primary);
-	font-size: 18px;
-	line-height: 1.8;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	min-height: 100vh;
+	background: var(--ivory);
+	color: var(--text-body);
+	font-size: 17px;
+	font-weight: 400;
+	line-height: 1.75;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
 }
 
 main {
 	width: 720px;
-	max-width: calc(100% - 2em);
+	max-width: calc(100% - 3em);
 	margin: auto;
-	padding: 3em 1em;
+	padding: 3em 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 0.5rem 0;
+	font-family: var(--font-display);
 	color: var(--text-primary);
 	line-height: 1.2;
+	margin: 0 0 0.5rem 0;
+	font-weight: 400;
 }
-h1 { font-size: 2.8em; }
-h2 { font-size: 2.2em; }
-h3 { font-size: 1.8em; }
-h4 { font-size: 1.4em; }
-h5 { font-size: 1.15em; }
 
-strong, b { font-weight: 700; }
+h1 { font-size: 3em; letter-spacing: -0.01em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.6em; }
+h4 { font-size: 1.3em; }
 
 a {
 	color: var(--accent);
 	text-decoration: none;
-	transition: all 0.3s ease;
+	transition: color var(--transition);
 }
 a:hover {
-	color: #a7ffeb;
-	text-shadow: 0 0 8px rgba(100, 255, 218, 0.3);
+	color: var(--blue-700);
 }
 
 p { margin-bottom: 1em; }
-.prose p { margin-bottom: 1.5em; }
+.prose p { margin-bottom: 1.6em; }
+
+strong, b { font-weight: 600; }
 
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: var(--radius-md);
 }
 
 code {
-	padding: 2px 6px;
-	background: rgba(100, 255, 218, 0.1);
-	border: 1px solid var(--border);
-	border-radius: 4px;
-	color: var(--accent);
-	font-size: 0.9em;
+	font-size: 0.88em;
+	padding: 2px 7px;
+	background: var(--pearl);
+	border-radius: var(--radius-sm);
+	color: var(--blue-700);
 }
 
 pre {
 	padding: 1.5em;
-	border-radius: 8px;
-	background: var(--bg-secondary) !important;
-	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	background: var(--blue-900) !important;
+	overflow-x: auto;
 }
 pre > code {
 	all: unset;
+	color: var(--blue-200);
 }
 
 blockquote {
-	border-left: 3px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.1em;
-	color: var(--text-secondary);
+	border-left: 3px solid var(--blue-300);
+	padding: 0.2em 0 0.2em 1.5em;
+	margin: 1.5em 0;
+	font-family: var(--font-display);
+	font-style: italic;
+	font-size: 1.15em;
+	color: var(--text-primary);
 }
 
 hr {
 	border: none;
-	border-top: 1px solid var(--border);
-	margin: 2em 0;
+	height: 1px;
+	background: var(--silver);
+	margin: 2.5em 0;
 }
 
 ::selection {
-	background: rgba(100, 255, 218, 0.2);
-	color: #fff;
+	background: var(--blue-200);
+	color: var(--blue-900);
 }
 
 @media (max-width: 720px) {
 	body { font-size: 16px; }
-	main { padding: 1em; }
+	main { padding: 2em 0; }
+	h1 { font-size: 2.2em; }
 }
 
 .sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
 	position: absolute !important;
-	height: 1px;
-	width: 1px;
+	width: 1px; height: 1px;
+	padding: 0; margin: 0;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px, 1px, 1px, 1px);
 	clip-path: inset(50%);
 	white-space: nowrap;
+	border: 0;
 }
