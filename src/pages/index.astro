@@ -1,29 +1,171 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 5);
 ---
 
 <!doctype html>
 <html lang="zh-CN">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.hero {
+				position: relative;
+				padding: 6em 1em 4em;
+				text-align: center;
+				overflow: hidden;
+			}
+			.hero::before {
+				content: '';
+				position: absolute;
+				top: -50%;
+				left: -50%;
+				width: 200%;
+				height: 200%;
+				background:
+					radial-gradient(ellipse at 30% 20%, rgba(100, 255, 218, 0.08) 0%, transparent 50%),
+					radial-gradient(ellipse at 70% 60%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+					radial-gradient(ellipse at 50% 80%, rgba(168, 85, 247, 0.04) 0%, transparent 50%);
+				animation: drift 20s ease-in-out infinite;
+				z-index: 0;
+			}
+			@keyframes drift {
+				0%, 100% { transform: translate(0, 0) rotate(0deg); }
+				33% { transform: translate(2%, -1%) rotate(1deg); }
+				66% { transform: translate(-1%, 2%) rotate(-1deg); }
+			}
+			.hero-content {
+				position: relative;
+				z-index: 1;
+				max-width: 640px;
+				margin: 0 auto;
+			}
+			.hero h1 {
+				font-size: 3.2em;
+				margin-bottom: 0.2em;
+				background: linear-gradient(135deg, var(--accent), #60a5fa, var(--accent));
+				background-size: 200% 200%;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				animation: shimmer 6s ease-in-out infinite;
+			}
+			@keyframes shimmer {
+				0%, 100% { background-position: 0% 50%; }
+				50% { background-position: 100% 50%; }
+			}
+			.hero .subtitle {
+				color: var(--text-secondary);
+				font-size: 1.15em;
+				line-height: 1.8;
+				margin-bottom: 2em;
+			}
+			.hero .cta {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5em;
+				padding: 0.7em 1.8em;
+				border: 1px solid var(--accent);
+				border-radius: 2em;
+				color: var(--accent);
+				font-size: 0.95em;
+				transition: all 0.3s ease;
+			}
+			.hero .cta:hover {
+				background: rgba(100, 255, 218, 0.1);
+				box-shadow: 0 0 20px rgba(100, 255, 218, 0.15);
+				text-shadow: none;
+			}
+
+			.recent-section {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 2em 1em 4em;
+			}
+			.section-title {
+				font-size: 0.85em;
+				color: var(--text-muted);
+				text-transform: uppercase;
+				letter-spacing: 0.15em;
+				margin-bottom: 2em;
+				padding-bottom: 0.5em;
+				border-bottom: 1px solid var(--border);
+			}
+			.post-list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.5em;
+			}
+			.post-item a {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				padding: 1em 1.2em;
+				border-radius: 8px;
+				color: var(--text-primary);
+				transition: all 0.3s ease;
+				border: 1px solid transparent;
+			}
+			.post-item a:hover {
+				background: var(--bg-card);
+				border-color: var(--border);
+				text-shadow: none;
+			}
+			.post-title {
+				font-weight: 500;
+			}
+			.post-date {
+				color: var(--text-muted);
+				font-size: 0.85em;
+				white-space: nowrap;
+				margin-left: 1em;
+			}
+			@media (max-width: 720px) {
+				.hero h1 { font-size: 2.2em; }
+				.hero .subtitle { font-size: 1em; }
+				.post-item a { flex-direction: column; gap: 0.3em; }
+				.post-date { margin-left: 0; }
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>AI 思考</h1>
-			<p>
-				在 AI 快速演进的时代，用文字记录观察和思考——不是教程搬运，而是带有个人视角的反思。
-			</p>
-			<p>
-				每一篇都是真正想过的东西。
-			</p>
-			<p>
-				<a href={`${import.meta.env.BASE_URL}blog`}>阅读全部文章 &rarr;</a>
-			</p>
-		</main>
+		<section class="hero">
+			<div class="hero-content">
+				<h1>AI 思考</h1>
+				<p class="subtitle">
+					在 AI 快速演进的时代，用文字记录观察和思考。<br />
+					不是教程搬运，而是带有个人视角的反思。
+				</p>
+				<a class="cta" href={`${import.meta.env.BASE_URL}blog`}>
+					阅读文章 <span>&rarr;</span>
+				</a>
+			</div>
+		</section>
+
+		<section class="recent-section">
+			<div class="section-title">最近发布</div>
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li class="post-item">
+						<a href={`${import.meta.env.BASE_URL}blog/${post.id}/`}>
+							<span class="post-title">{post.data.title}</span>
+							<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+						</a>
+					</li>
+				))}
+			</ul>
+		</section>
 		<Footer />
 	</body>
 </html>

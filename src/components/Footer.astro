@@ -3,13 +3,32 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} 李耀. All rights reserved.
+	<div class="footer-content">
+		<span class="footer-accent">&#x2732;</span>
+		<p>&copy; {today.getFullYear()} 李耀 &middot; AI 思考</p>
+	</div>
 </footer>
 <style>
 	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
+		padding: 3em 1em;
 		text-align: center;
+		border-top: 1px solid var(--border);
+		background: rgba(10, 14, 23, 0.6);
+	}
+	.footer-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5em;
+	}
+	.footer-accent {
+		color: var(--accent);
+		font-size: 1.2em;
+		opacity: 0.5;
+	}
+	p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.85em;
 	}
 </style>

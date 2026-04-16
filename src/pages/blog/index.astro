@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
@@ -13,101 +12,87 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`文章 - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
-			main {
-				width: 960px;
+			.page-header {
+				text-align: center;
+				padding: 3em 1em 1em;
 			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
+			.page-header h1 {
+				font-size: 2em;
+				color: var(--accent);
+			}
+			.page-header p {
+				color: var(--text-muted);
+				font-size: 0.95em;
+			}
+			main { width: 760px; }
+			.post-list {
+				list-style: none;
 				margin: 0;
 				padding: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 1em;
 			}
-			ul li {
-				width: calc(50% - 1rem);
+			.post-card {
+				padding: 1.5em;
+				border: 1px solid var(--border);
+				border-radius: 10px;
+				background: var(--bg-card);
+				transition: all 0.3s ease;
 			}
-			ul li * {
+			.post-card:hover {
+				border-color: rgba(100, 255, 218, 0.3);
+				box-shadow: 0 0 30px rgba(100, 255, 218, 0.05);
+				transform: translateY(-2px);
+			}
+			.post-card a {
 				text-decoration: none;
-				transition: 0.2s ease;
+				color: inherit;
 			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
+			.post-card h3 {
+				margin: 0 0 0.3em;
+				font-size: 1.3em;
+				color: var(--text-primary);
+				transition: color 0.3s;
 			}
-			ul li:first-child img {
-				width: 100%;
+			.post-card:hover h3 { color: var(--accent); }
+			.post-card .description {
+				color: var(--text-secondary);
+				font-size: 0.9em;
+				margin: 0 0 0.8em;
+				line-height: 1.6;
 			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
+			.post-card .meta {
+				color: var(--text-muted);
+				font-size: 0.8em;
 			}
 			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
+				.post-card { padding: 1em; }
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
+		<div class="page-header">
+			<h1>全部文章</h1>
+			<p>共 {posts.length} 篇</p>
+		</div>
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li class="post-card">
+						<a href={`${import.meta.env.BASE_URL}blog/${post.id}/`}>
+							<h3>{post.data.title}</h3>
+							{post.data.description && <p class="description">{post.data.description}</p>}
+							<span class="meta"><FormattedDate date={post.data.pubDate} /></span>
+						</a>
+					</li>
+				))}
+			</ul>
 		</main>
 		<Footer />
 	</body>
