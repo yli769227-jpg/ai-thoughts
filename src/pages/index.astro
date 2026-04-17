@@ -246,7 +246,7 @@ const posts = (await getCollection('blog'))
 					Observations, reflections, and ideas on artificial intelligence
 					— written from a personal point of view, not a textbook.
 				</p>
-				<a class="hero-cta" href={`${import.meta.env.BASE_URL}blog`}>
+				<a class="hero-cta" href={`${import.meta.env.BASE_URL}/blog`}>
 					Read all posts <span>&rarr;</span>
 				</a>
 			</div>
@@ -257,7 +257,7 @@ const posts = (await getCollection('blog'))
 			<ul class="post-list">
 				{posts.map((post) => (
 					<li class="post-item">
-						<a class="post-link" href={`${import.meta.env.BASE_URL}blog/${post.id}/`}>
+						<a class="post-link" href={`${import.meta.env.BASE_URL}/blog/${post.id}/`}>
 							<span class="post-title">{post.data.title}</span>
 							<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
 						</a>

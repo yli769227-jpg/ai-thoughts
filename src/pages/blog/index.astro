@@ -116,7 +116,7 @@ const posts = (await getCollection('blog')).sort(
 			<ul class="posts">
 				{posts.map((post) => (
 					<li class="card">
-						<a href={`${import.meta.env.BASE_URL}blog/${post.id}/`}>
+						<a href={`${import.meta.env.BASE_URL}/blog/${post.id}/`}>
 							<h3 class="card-title">{post.data.title}</h3>
 							{post.data.description && <p class="card-desc">{post.data.description}</p>}
 							<span class="card-meta"><FormattedDate date={post.data.pubDate} /></span>
