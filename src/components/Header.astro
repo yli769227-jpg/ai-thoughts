@@ -1,81 +1,100 @@
 ---
-import HeaderLink from './HeaderLink.astro';
+const { pathname } = Astro.url;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const is = (href) => {
+	const target = base + href;
+	if (href === '/') return pathname === base + '/' || pathname === base || pathname === '/';
+	return pathname === target || pathname.startsWith(target + '/');
+};
 ---
-
-<header>
-	<nav>
-		<a class="logo" href={`${import.meta.env.BASE_URL}`}>
-			<span class="logo-mark">ai</span><span class="logo-sep">—</span><span class="logo-word">thought</span>
+<header class="site-header">
+	<div class="wrap">
+		<a href={base + '/'} class="brand">
+			<span class="dot"></span>ai<em>·thought</em><span class="caret"></span>
 		</a>
-		<div class="nav-right">
-			<HeaderLink href={`${import.meta.env.BASE_URL}/blog`}>Writing</HeaderLink>
-			<HeaderLink href={`${import.meta.env.BASE_URL}/about`}>About</HeaderLink>
-			<a class="nav-icon" href="https://github.com/yli769227-jpg" target="_blank" aria-label="GitHub">
-				<svg viewBox="0 0 16 16" width="18" height="18"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-			</a>
-		</div>
-	</nav>
+		<nav>
+			<a href={base + '/'} class:list={[{ active: is('/') && !is('/blog') && !is('/about') }]}>~/home</a>
+			<a href={base + '/blog/'} class:list={[{ active: is('/blog') }]}>writing</a>
+			<a href={base + '/about/'} class:list={[{ active: is('/about') }]}>about</a>
+		</nav>
+	</div>
 </header>
 
 <style>
-	header {
+	.site-header {
 		position: sticky;
 		top: 0;
-		z-index: 100;
-		background: rgba(250, 251, 254, 0.88);
-		backdrop-filter: blur(16px) saturate(180%);
-		-webkit-backdrop-filter: blur(16px) saturate(180%);
-		border-bottom: 1px solid rgba(228, 232, 241, 0.6);
+		z-index: 50;
+		backdrop-filter: blur(14px) saturate(140%);
+		-webkit-backdrop-filter: blur(14px) saturate(140%);
+		background: rgba(255, 255, 255, 0.72);
+		border-bottom: 1px solid rgba(14, 28, 56, 0.06);
 	}
-	nav {
-		max-width: 860px;
-		margin: 0 auto;
+	.wrap {
+		width: 960px;
+		max-width: calc(100% - 3em);
+		margin: auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 1em 2em;
+		padding: 1.1em 0;
 	}
-	.logo {
-		text-decoration: none;
-		display: flex;
-		align-items: baseline;
-		gap: 0;
-		transition: opacity var(--transition);
-	}
-	.logo:hover { opacity: 0.7; }
-	.logo-mark {
-		font-family: var(--font-display);
-		font-size: 1.35em;
-		font-style: italic;
-		color: var(--accent);
-		letter-spacing: -0.02em;
-	}
-	.logo-sep {
-		color: var(--silver);
-		margin: 0 0.15em;
-		font-weight: 300;
-	}
-	.logo-word {
-		font-family: var(--font-body);
-		font-size: 0.95em;
-		font-weight: 500;
-		color: var(--text-primary);
-		letter-spacing: 0.03em;
-	}
-	.nav-right {
+	.brand {
 		display: flex;
 		align-items: center;
-		gap: 2em;
+		gap: 0.55em;
+		color: var(--ink);
+		text-decoration: none;
+		font-family: var(--font-display);
+		font-size: 1.45em;
+		letter-spacing: -0.01em;
 	}
-	.nav-icon {
-		color: var(--slate);
+	.brand .dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: var(--accent);
+		box-shadow: 0 0 0 4px rgba(41, 72, 255, 0.15);
+		animation: pulse 2.2s ease-in-out infinite;
+	}
+	.brand em {
+		font-style: italic;
+		color: var(--accent);
+	}
+	nav {
 		display: flex;
+		gap: 1.4em;
+		font-family: var(--font-mono);
+		font-size: 0.82em;
+	}
+	nav a {
+		position: relative;
+		color: var(--slate);
+		text-decoration: none;
+		padding: 0.4em 0;
 		transition: color var(--transition);
 	}
-	.nav-icon:hover { color: var(--accent); }
-
+	nav a::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 100%;
+		bottom: 0;
+		height: 2px;
+		background: var(--accent);
+		transition: right 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+	nav a:hover,
+	nav a.active {
+		color: var(--ink);
+	}
+	nav a:hover::after,
+	nav a.active::after {
+		right: 0;
+	}
 	@media (max-width: 720px) {
-		nav { padding: 0.8em 1.2em; }
-		.nav-right { gap: 1.2em; }
+		nav {
+			gap: 0.9em;
+		}
 	}
 </style>

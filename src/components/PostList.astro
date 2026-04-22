@@ -1,0 +1,132 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+	limit?: number;
+}
+
+const { limit } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const all = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const posts = limit ? all.slice(0, limit) : all;
+const total = all.length;
+---
+<ul class="post-list">
+	{posts.map((p, i) => {
+		const num = String(total - all.indexOf(p)).padStart(2, '0');
+		const d = p.data.pubDate;
+		const month = d.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+		const day = String(d.getDate()).padStart(2, '0');
+		return (
+			<li>
+				<a class="card" href={`${base}/blog/${p.id}/`} data-burst>
+					<div class="num">#{num}<span class="slash"> · </span>{month} {day}</div>
+					<div class="body">
+						<h2>{p.data.title}</h2>
+						<p class="desc">{p.data.description}</p>
+					</div>
+					<div class="arrow">→</div>
+				</a>
+			</li>
+		);
+	})}
+</ul>
+
+<style>
+	.post-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.post-list li {
+		position: relative;
+	}
+	.card {
+		display: grid;
+		grid-template-columns: 110px 1fr auto;
+		gap: 1.5em;
+		align-items: start;
+		padding: 1.6em 0;
+		border-bottom: 1px solid var(--silver);
+		color: inherit;
+		text-decoration: none;
+		cursor: pointer;
+		position: relative;
+		transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+	.card::before {
+		content: '';
+		position: absolute;
+		left: -16px;
+		top: 0;
+		bottom: 0;
+		width: 2px;
+		background: var(--accent);
+		transform: scaleY(0);
+		transform-origin: top;
+		transition: transform 0.45s var(--transition);
+	}
+	.card:hover::before {
+		transform: scaleY(1);
+	}
+	.card:hover {
+		transform: translateX(6px);
+	}
+	.card:hover .num {
+		color: var(--accent);
+	}
+	.card:hover h2 {
+		color: var(--accent);
+	}
+	.card:hover .arrow {
+		transform: translateX(6px);
+		color: var(--accent);
+	}
+	.num {
+		font-family: var(--font-mono);
+		font-size: 0.78em;
+		color: var(--slate);
+		letter-spacing: 0.12em;
+		transition: color var(--transition);
+		padding-top: 0.45em;
+		white-space: nowrap;
+	}
+	.num .slash {
+		color: var(--silver);
+		margin: 0 0.3em;
+	}
+	.card h2 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: 1.65em;
+		line-height: 1.2;
+		color: var(--ink);
+		margin: 0 0 0.25em;
+		transition: color var(--transition);
+	}
+	.desc {
+		color: #4a5270;
+		font-size: 0.96em;
+		line-height: 1.55;
+		margin: 0;
+	}
+	.arrow {
+		font-family: var(--font-mono);
+		color: var(--slate);
+		padding-top: 0.45em;
+		transition: transform var(--transition), color var(--transition);
+	}
+	@media (max-width: 720px) {
+		.card {
+			grid-template-columns: 1fr;
+			gap: 0.4em;
+		}
+		.num,
+		.arrow {
+			display: none;
+		}
+	}
+</style>

@@ -1,53 +1,47 @@
 ---
-const today = new Date();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const year = new Date().getFullYear();
 ---
-
-<footer>
-	<div class="footer-inner">
-		<div class="footer-line"></div>
-		<div class="footer-content">
-			<span class="footer-logo"><em>ai</em>—thought</span>
-			<span class="footer-copy">&copy; {today.getFullYear()} Li Yao</span>
-		</div>
+<footer class="site-footer">
+	<div class="wrap">
+		<span>© {year} ai-thought · built with astro · <span class="live">●</span> live</span>
+		<span>
+			<a href={base + '/rss.xml'}>rss.xml</a>
+			<span class="sep">·</span>
+			<a href="https://github.com/yli769227-jpg/ai-thoughts" target="_blank" rel="noopener">github</a>
+		</span>
 	</div>
 </footer>
 
 <style>
-	footer {
-		padding: 0 2em 4em;
+	.site-footer {
 		margin-top: 4em;
+		padding: 2em 0;
+		border-top: 1px solid var(--silver);
+		color: var(--slate);
+		font-family: var(--font-mono);
+		font-size: 0.78em;
 	}
-	.footer-inner {
-		max-width: 860px;
-		margin: 0 auto;
-	}
-	.footer-line {
-		height: 1px;
-		background: linear-gradient(90deg, transparent, var(--silver), transparent);
-		margin-bottom: 2em;
-	}
-	.footer-content {
+	.wrap {
+		width: 960px;
+		max-width: calc(100% - 3em);
+		margin: auto;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
-	.footer-logo {
-		font-family: var(--font-body);
-		font-size: 0.85em;
-		font-weight: 500;
-		color: var(--slate);
-		letter-spacing: 0.02em;
+	.sep {
+		margin: 0 0.4em;
 	}
-	.footer-logo em {
-		font-family: var(--font-display);
-		font-style: italic;
+	a {
+		color: var(--slate);
+		text-decoration: none;
+		transition: color var(--transition);
+	}
+	a:hover {
 		color: var(--accent);
 	}
-	.footer-copy {
-		font-size: 0.8em;
-		color: var(--slate);
-	}
-	@media (max-width: 720px) {
-		footer { padding: 0 1.2em 3em; }
+	.live {
+		color: var(--accent);
 	}
 </style>

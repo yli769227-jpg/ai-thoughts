@@ -1,19 +1,91 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
+<BaseLayout title="About">
+	<main class="container">
+		<section class="hero">
+			<div class="kicker">
+				<span class="bar"></span>
+				<span>ABOUT</span>
+			</div>
+			<h1 data-reveal-words>One person,<br />one <em>notebook</em>.</h1>
+			<p class="lead">
+				我是 yao li。这里是我在 AI 时代为自己留下的笔记本。
+			</p>
+			<div class="block">
+				<p>
+					不做教程搬运,不追行业新闻。只写自己真正想清楚的东西 — 每篇大概是一次
+					"我为什么会这么看" 的完整推导。
+				</p>
+				<p>
+					主要写:<strong>AI 协作的边界</strong>、<strong>工程师在 AI 时代的品味</strong>、
+					<strong>中国 AI 行业的结构性问题</strong>,以及一些偶尔跑出来的碎想。
+				</p>
+			</div>
+		</section>
+	</main>
+</BaseLayout>
 
-<Layout
-	title="About"
-	description="About this blog and its author"
-	pubDate={new Date('2026-04-16')}
->
-	<p>
-		I'm Li Yao. This is where I write about artificial intelligence — not tutorials
-		or trend-chasing, but genuine reflections on what I observe and practice.
-	</p>
-	<p>
-		Every piece here is something I've actually thought through.
-		If you're also wondering how AI is reshaping the way we work and live,
-		I'd love to hear from you.
-	</p>
-</Layout>
+<style>
+	.hero {
+		padding: 3.5em 0 2em;
+	}
+	.kicker {
+		font-family: var(--font-mono);
+		font-size: 0.78em;
+		letter-spacing: 0.24em;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 1.5em;
+		display: flex;
+		gap: 0.8em;
+		align-items: center;
+	}
+	.kicker .bar {
+		display: inline-block;
+		width: 28px;
+		height: 1px;
+		background: var(--accent);
+	}
+	.hero h1 {
+		font-family: var(--font-display);
+		font-size: 4.6em;
+		line-height: 1;
+		letter-spacing: -0.02em;
+		margin: 0 0 0.4em;
+		color: var(--ink);
+		font-weight: 400;
+	}
+	.hero h1 :global(em) {
+		font-style: italic;
+		color: var(--accent);
+	}
+	.lead {
+		font-family: var(--font-display);
+		font-size: 1.55em;
+		font-style: italic;
+		color: var(--ink);
+		line-height: 1.45;
+		max-width: 640px;
+		margin: 0 0 2em;
+	}
+	.block {
+		max-width: 640px;
+		color: var(--text-body);
+		font-size: 1.02em;
+		line-height: 1.8;
+	}
+	.block p {
+		margin: 0 0 1.2em;
+	}
+	.block strong {
+		color: var(--ink);
+		font-weight: 600;
+		background: linear-gradient(transparent 62%, rgba(41, 72, 255, 0.18) 62%);
+	}
+	@media (max-width: 720px) {
+		.hero h1 {
+			font-size: 2.6em;
+		}
+	}
+</style>
