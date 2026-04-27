@@ -1,0 +1,101 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<aside class="subscribe">
+	<div class="label">/ stay-in-touch</div>
+	<p class="lede">如果这篇文章对你有用,留个入口下次还能找到我。</p>
+	<ul class="links">
+		<li>
+			<span class="key">rss</span>
+			<a href={base + '/rss.xml'}>订阅 feed</a>
+			<span class="hint">— 喂给 Reeder / Feedly / Inoreader</span>
+		</li>
+		<li>
+			<span class="key">github</span>
+			<a href="https://github.com/yli769227-jpg/ai-thoughts" target="_blank" rel="noopener">star · watch this repo</a>
+			<span class="hint">— 新文章会作为 commit 推送,Watch 后第一时间收到通知</span>
+		</li>
+		<li>
+			<span class="key">author</span>
+			<a href="https://github.com/yli769227-jpg" target="_blank" rel="noopener">follow @yli769227-jpg</a>
+			<span class="hint">— 关注作者本人</span>
+		</li>
+	</ul>
+</aside>
+
+<style>
+	.subscribe {
+		margin: 3em 0 2em;
+		padding: 1.6em 1.8em;
+		border: 1px solid var(--silver);
+		border-left: 3px solid var(--accent);
+		background: linear-gradient(180deg, rgba(41, 72, 255, 0.025), transparent);
+		border-radius: 2px;
+	}
+	.label {
+		font-family: var(--font-mono);
+		font-size: 0.72em;
+		color: var(--accent);
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		margin-bottom: 0.7em;
+	}
+	.lede {
+		font-family: var(--font-display);
+		font-style: italic;
+		font-size: 1.1em;
+		color: var(--ink);
+		line-height: 1.5;
+		margin: 0 0 1.2em;
+	}
+	.links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		font-family: var(--font-mono);
+		font-size: 0.84em;
+		line-height: 1.85;
+	}
+	.links li {
+		margin: 0.15em 0;
+		color: var(--slate);
+	}
+	.key {
+		display: inline-block;
+		min-width: 4.2em;
+		color: var(--accent);
+		opacity: 0.7;
+	}
+	.key::before {
+		content: '→ ';
+	}
+	.links a {
+		color: var(--ink);
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		transition: border-color var(--transition), color var(--transition);
+	}
+	.links a:hover {
+		color: var(--accent);
+		border-bottom-color: var(--accent);
+	}
+	.hint {
+		color: var(--slate);
+		opacity: 0.85;
+	}
+	@media (max-width: 640px) {
+		.subscribe {
+			padding: 1.2em 1.2em;
+		}
+		.key {
+			display: block;
+			min-width: 0;
+			margin-top: 0.4em;
+		}
+		.hint {
+			display: block;
+			padding-left: 0;
+			font-size: 0.92em;
+		}
+	}
+</style>

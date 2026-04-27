@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubscribeBlock from '../../components/SubscribeBlock.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -36,6 +37,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 			<div class="prose" data-reveal-children>
 				<Content />
 			</div>
+			<SubscribeBlock />
 			<hr class="sep" />
 			<div class="nav">
 				<a class="back-bottom" href={base + '/blog/'}>← index</a>
