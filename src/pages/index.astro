@@ -9,13 +9,16 @@ const posts = (await getCollection('blog')).sort(
 const latest = posts[0];
 const total = posts.length;
 const latestDate = latest?.data.pubDate.toISOString().slice(0, 10) ?? '';
+const kicker = latest
+	? `LOG · ${latest.data.pubDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' }).toUpperCase()} · ${total} ENTRIES`
+	: `LOG · ${total} ENTRIES`;
 ---
 <BaseLayout>
 	<main class="container">
 		<section class="hero">
 			<div class="kicker">
 				<span class="bar"></span>
-				<span>LOG · APR 2026 · {total} ENTRIES</span>
+				<span>{kicker}</span>
 			</div>
 			<h1 data-reveal-words>Personal reflections<br />on <em>artificial intelligence</em>.</h1>
 			<p class="lead">模型每三个月换一代。对话会失效,prompt 会过时 — 写下来的判断力不会。</p>

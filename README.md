@@ -15,6 +15,7 @@ src/
     Header.astro          # sticky nav w/ pulsing dot + caret
     Footer.astro
     PostList.astro        # post cards w/ data-burst hook
+    SubscribeBlock.astro  # subscribe CTA shown on article pages
   layouts/
     BaseLayout.astro
   pages/
