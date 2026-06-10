@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <rect width="800" height="440" fill="#ffffff"/>
+  <text x="40" y="44" font-size="22" font-weight="700" fill="#1e293b">两条价格曲线的剪刀差(示意)</text>
+  <text x="40" y="70" font-size="13" fill="#64748b">便宜的是昨天的前沿,变贵的是今天的前沿</text>
+
+  <!-- axes -->
+  <line x1="80" y1="100" x2="80" y2="360" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line x1="80" y1="360" x2="720" y2="360" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="60" y="95" font-size="13" fill="#64748b">价格</text>
+  <text x="690" y="385" font-size="13" fill="#64748b">时间</text>
+  <text x="100" y="385" font-size="13" fill="#94a3b8">2023</text>
+  <text x="640" y="385" font-size="13" fill="#94a3b8">2026</text>
+
+  <!-- descending curve: same-capability price -->
+  <path d="M 110 130 C 280 150, 400 240, 660 320" fill="none" stroke="#2563eb" stroke-width="3.5"/>
+  <text x="370" y="290" font-size="15" font-weight="700" fill="#2563eb">同一档能力的价格 ↓</text>
+  <text x="370" y="312" font-size="12" fill="#3b82f6">昨天的前沿,一年后变白菜价</text>
+
+  <!-- ascending curve: frontier price -->
+  <path d="M 110 320 C 300 300, 460 220, 660 130" fill="none" stroke="#d97706" stroke-width="3.5"/>
+  <text x="330" y="160" font-size="15" font-weight="700" fill="#b45309">当下最强模型的标价 ↑</text>
+  <text x="330" y="182" font-size="12" fill="#d97706">Fable $50 → Mythos $125(每百万输出 token)</text>
+
+  <!-- gap arrow -->
+  <line x1="668" y1="148" x2="668" y2="302" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 4"/>
+  <path d="M 668 142 l -5 10 l 10 0 z" fill="#dc2626"/>
+  <path d="M 668 308 l -5 -10 l 10 0 z" fill="#dc2626"/>
+  <text x="688" y="220" font-size="14" font-weight="700" fill="#dc2626">能力</text>
+  <text x="688" y="240" font-size="14" font-weight="700" fill="#dc2626">溢价</text>
+  <text x="688" y="260" font-size="14" font-weight="700" fill="#dc2626">断层</text>
+
+  <text x="40" y="420" font-size="12" fill="#94a3b8">示意图:纵轴为同口径 API 价格趋势,非精确比例</text>
+</svg>

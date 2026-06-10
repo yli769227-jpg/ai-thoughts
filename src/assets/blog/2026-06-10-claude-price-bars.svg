@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <rect width="800" height="440" fill="#ffffff"/>
+  <text x="40" y="44" font-size="22" font-weight="700" fill="#1e293b">每百万输出 token 价格(美元)</text>
+  <text x="40" y="70" font-size="13" fill="#64748b">Claude 系列模型,2026 年 6 月公开定价</text>
+
+  <!-- Sonnet 4.6 : $15 -->
+  <text x="40" y="125" font-size="15" fill="#334155">Sonnet 4.6</text>
+  <rect x="170" y="108" width="56" height="26" rx="4" fill="#94a3b8"/>
+  <text x="236" y="127" font-size="15" font-weight="700" fill="#334155">$15</text>
+
+  <!-- Opus 4.8 : $25 -->
+  <text x="40" y="185" font-size="15" fill="#334155">Opus 4.8</text>
+  <rect x="170" y="168" width="93" height="26" rx="4" fill="#64748b"/>
+  <text x="273" y="187" font-size="15" font-weight="700" fill="#334155">$25</text>
+
+  <!-- Fable 5 : $50 -->
+  <text x="40" y="245" font-size="15" font-weight="700" fill="#b45309">Fable 5(新发布)</text>
+  <rect x="170" y="228" width="187" height="26" rx="4" fill="#d97706"/>
+  <text x="367" y="247" font-size="15" font-weight="700" fill="#b45309">$50</text>
+
+  <!-- Mythos Preview : $125 -->
+  <text x="40" y="305" font-size="15" fill="#6d28d9">Mythos Preview</text>
+  <rect x="170" y="288" width="466" height="26" rx="4" fill="#a78bfa" stroke="#7c3aed" stroke-dasharray="6 4" stroke-width="1.5"/>
+  <text x="646" y="307" font-size="15" font-weight="700" fill="#6d28d9">$125</text>
+  <text x="170" y="334" font-size="12" fill="#7c3aed">仅邀请制(Project Glasswing),未公开开放</text>
+
+  <line x1="170" y1="92" x2="170" y2="352" stroke="#cbd5e1" stroke-width="1"/>
+
+  <text x="40" y="390" font-size="12" fill="#94a3b8">输入价:Sonnet $3 / Opus $5 / Fable $10 / Mythos $25(每百万 token)</text>
+  <text x="40" y="412" font-size="12" fill="#94a3b8">数据来源:Anthropic 公开定价与媒体报道,2026-06</text>
+</svg>
